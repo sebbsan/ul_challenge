@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "NODE_ENV=test npm-run-all --continue-on-error lint create-sqlite-db db:migrate test:e2e drop-sqlite-db",
     "lint": "eslint ./lib ",

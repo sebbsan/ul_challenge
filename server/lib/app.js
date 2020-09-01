@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
-const bodyParser = require('body-parser');
+const { urlencoded, json } = require('body-parser');
 const register = require('./api/controllers/register.controller');
 const login = require('./api/controllers/login.controller');
 
@@ -19,8 +19,8 @@ const errorHandler = (err, req, res, next) => {
   }
 };
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.post('/register', register);
 app.post('/login', login);

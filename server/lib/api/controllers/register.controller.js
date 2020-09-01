@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
 const db = require('../services/db.service');
+const { hashPassword } = require('../services/bcrypt.service');
 
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const passwordRegexp = /^(?=.*\d)(?=.*\w)([^\s]){8,}$/;
@@ -33,7 +33,7 @@ const register = async function (req, res, next) {
       where: { email },
     });
     if (users.length === 0) {
-      const passwordHash = await bcrypt.hash(password, 10);
+      const passwordHash = hashPassword(password);
 
       const createdUser = await db.User.create({
         fullName,
