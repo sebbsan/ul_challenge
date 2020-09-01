@@ -40,10 +40,8 @@ will create a new user.
 
 will login a user by returning a JWT.
 
-I decided to use sessionless authentication using a JWT to avoid creating a server state and make things more complicated.
-As persistence layer, SQLLite is used, but other databases can be swapped in if needed.
-I decided to use bcrypt to hash the password as it's generally accepted to be a safe hashing method.
-I decided to implement a suite of End 2 End tests to verify that the API as this is giving us the best understanding of the system from an outside perspective, and is testing a lot of things at once - thart the controllers and the database access work.
+I decided to use sessionless authentication using a JWT to avoid creating a server state and make things more complicated. As persistence layer, SQLLite is used, but other databases can be swapped in if needed as the access layer is abstracted using sequelize ORM. I decided to use bcrypt to hash the password as it's generally accepted to be a very safe hashing method. In terms of tests, I decided to implement a suite of End 2 End tests to verify the API, as this is giving us the best understanding of the system as a black box, and is testing all the layers of the architecture at once - the API, the controllers, the database access services and the actual database persistence.
+
 How to run the server:
 
 1. cd `server`
@@ -53,9 +51,12 @@ How to run the server:
 
 ## Solution - Frontend
 
-A simple react app is available in `/client`. Right now it's hardwired to work with the development backend.
+A simple react app is available in `/client`. Right now it's hardwired to work with the development backend. The JWT is used to submit session information to the frontend and is kept in the local storage to keep the client logged in.
+
 How to run the frontend:
 
 1. cd `client`
 1. run `npm install` to install dependencies
 1. run `npm start` to launch the frontend dev server - it will be opened in your default browser
+1. you can register and log in afterwards
+
